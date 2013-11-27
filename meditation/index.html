@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Meditation Timer</title>
+	<script type = "text/javascript">
+	  var timer_interval;
+		 var remaining_minutes = 0;
+		 var remaining_seconds = 5;
+		 function triggerAlarm() {
+		 alarm_sound = document.getElementById('alarm_sound');
+		 alarm_sound.play();
+		 }
+		 function updateTimer() {
+		  var remaining_time_display = document.getElementById('remaining_time');
+			if (remaining_seconds == 0) {
+			   if (remaining_minutes == 0) {
+			      triggerAlarm();
+		 stopTimer();
+			      }
+	  else {
+			   remaining_minutes = remaining_minutes - 1;
+			   remaining_seconds = 59;
+	  }
+			}
+			else {
+			     remaining_seconds = remaining_seconds - 1;
+			     }
+		 remaining_time_display.innerHTML = remaining_minutes + ':' + remaining_seconds;
+   		}
+		function startTimer() {
+			timer_interval = setInterval('updateTimer()', 1000);
+		}
+		 function stopTimer() {
+		 clearInterval(timer_interval);
+	  }
+	</script>
+</head>
+<body>
+	<h1>Meditation Timer</h1>
+	<input type = "button" value = "Start" onclick = "startTimer()" />
+	<p id = "remaining_time">20</p>
+	<audio preload = "auto" id = "alarm_sound">
+	  Sorry, your browser does not support the HTML5 audio element. The alarm will not sound.
+	  <source src = "alarm_sound.ogg" type = "audio/ogg" />
+	</audio>
+</body>
+</html>
